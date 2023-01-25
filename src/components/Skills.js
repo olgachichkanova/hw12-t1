@@ -1,13 +1,16 @@
 import { Fragment } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeSearchField } from '../slices';
 const Skills = () => {
-    const search=''
-    const hasQuery = ''
-    const loading = false;
-    const error = null;
-    const items = []
-    const handleSearch = () => {
+    const {items, loading, error, search} = useSelector(state => state.skills)
+    const dispatch = useDispatch();
 
+    const handleSearch = (e) => {
+        const { value } = e.target;
+        dispatch(changeSearchField({search: value}))
     }
+    
+    const hasQuery = search.trim() !== '';
     return(
         <Fragment>
             <div><input type="search" value={search} onChange={handleSearch} /></div>
